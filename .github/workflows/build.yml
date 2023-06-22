@@ -40,6 +40,10 @@ jobs:
       - name: Download WDK
         run: Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2085767 -OutFile wdksetup.exe
 
+      - name: List files recursively for debugging
+        run: |
+          dir /s
+
       - name: Install WDK
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
