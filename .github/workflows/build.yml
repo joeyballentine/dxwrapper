@@ -41,19 +41,15 @@ jobs:
       - name: Install WDK
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
-      - name: Build app for release
-        run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+      - name: Build dxwrapper
+        run: msbuild dxwrapper.vcxproj -t:${{matrix.build-flavour}} -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
-      - name: List files recursively for debugging
-        run: |
-          Get-ChildItem
-
-      #   - name: Copy readme
-      #     run: copy artifacts_readme.txt _output
+      - name: Build stubs
+        run: msbuild ./Stub/stub.vcxproj -t:${{matrix.build-flavour}} -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Upload binaries
         uses: actions/upload-artifact@v3
         with:
           name: dxwrapper-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
           path: |
-            bin\*
+            bin\${{matrix.build-flavour}}\Build\*
