@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-2022
+    runs-on: windows-2019
 
     strategy:
       matrix:
@@ -39,7 +39,7 @@ jobs:
 
       - name: Set up WDK
         run: |
-          Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2026156 -OutFile wdksetup.exe
+          Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2085767 -OutFile wdksetup.exe
           ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
       - name: Build app for release
