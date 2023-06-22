@@ -50,7 +50,7 @@ jobs:
     #   - name: Upload binaries
     #     uses: actions/upload-artifact@v3
     #     with:
-    #       name: dxvk-remix-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
+    #       name: dxwrapper-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
     #       path: |
     #         _output\*.dll
     #         _output\*.pdb
