@@ -45,7 +45,7 @@ jobs:
         run: msbuild dxwrapper.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Build stubs
-        run: msbuild ./Stub/stub.vcxproj } -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+        run: msbuild ./Stub/stub.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Copy files
         run: |
