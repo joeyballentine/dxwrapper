@@ -39,15 +39,15 @@ jobs:
 
       - name: Set up WDK
         run: |
-          Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2196230 -OutFile wdksetup.exe
-          ./wdksetup.exe /features OptionId.WindowsDriverKitComplete /quiet
+          Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2026156 -OutFile wdksetup.exe
+          ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
       - name: Build app for release
         run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:diag -property:Configuration=${{matrix.build-flavour}}
 
       - name: List files recursively for debugging
         run: |
-          ls -R
+          dir /s
 
     #   - name: Copy readme
     #     run: copy artifacts_readme.txt _output
