@@ -42,10 +42,10 @@ jobs:
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
       - name: Build dxwrapper
-        run: msbuild dxwrapper.vcxproj -t:${{matrix.build-flavour}} -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+        run: msbuild dxwrapper.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Build stubs
-        run: msbuild ./Stub/stub.vcxproj -t:${{matrix.build-flavour}} -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+        run: msbuild ./Stub/stub.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Upload binaries
         uses: actions/upload-artifact@v3
