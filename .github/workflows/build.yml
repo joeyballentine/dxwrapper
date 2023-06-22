@@ -40,7 +40,7 @@ jobs:
       - name: Set up WDK
         run: |
           Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2196230 -OutFile wdksetup.exe
-          wdksetup.exe /features OptionId.WindowsDriverKitComplete /quiet
+          ./wdksetup.exe /features OptionId.WindowsDriverKitComplete /quiet
 
       - name: Build app for release
         run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:diag -property:Configuration=${{matrix.build-flavour}}
