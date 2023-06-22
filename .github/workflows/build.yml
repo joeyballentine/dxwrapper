@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     strategy:
       matrix:
@@ -37,10 +37,11 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
-      - name: Set up WDK
-        run: |
-          Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2085767 -OutFile wdksetup.exe
-          ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
+      - name: Download WDK
+        run: Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2085767 -OutFile wdksetup.exe
+
+      - name: Install WDK
+        run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
       - name: Build app for release
         run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:diag -property:Configuration=${{matrix.build-flavour}}
