@@ -14,9 +14,7 @@ jobs:
       matrix:
         include:
           - build-flavour: Debug
-            output-subdir: _Debug
           - build-flavour: Release
-            output-subdir: _Release
 
     steps:
       - name: Setup variables
@@ -44,20 +42,18 @@ jobs:
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
 
       - name: Build app for release
-        run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:diag -property:Configuration=${{matrix.build-flavour}}
+        run: msbuild dxwrapper.vcxproj -t:rebuild -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: List files recursively for debugging
         run: |
           Get-ChildItem
 
-    #   - name: Copy readme
-    #     run: copy artifacts_readme.txt _output
+      #   - name: Copy readme
+      #     run: copy artifacts_readme.txt _output
 
-    #   - name: Upload binaries
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: dxwrapper-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
-    #       path: |
-    #         _output\*.dll
-    #         _output\*.pdb
-    #         _output\*.txt
+      - name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: dxwrapper-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
+          path: |
+            bin\*
