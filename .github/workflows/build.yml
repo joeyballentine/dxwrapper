@@ -38,11 +38,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Download WDK
-        run: Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2164149 -OutFile wdksetup.exe
-
-      - name: List files recursively for debugging
-        run: |
-          Get-ChildItem
+        run: Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2026156 -OutFile wdksetup.exe
 
       - name: Install WDK
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
