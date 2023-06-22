@@ -42,7 +42,7 @@ jobs:
 
       - name: List files recursively for debugging
         run: |
-          dir /s
+          Get-ChildItem
 
       - name: Install WDK
         run: ./wdksetup.exe /features OptionId.WindowsDriverKitComplete
@@ -52,7 +52,7 @@ jobs:
 
       - name: List files recursively for debugging
         run: |
-          dir /s
+          Get-ChildItem
 
     #   - name: Copy readme
     #     run: copy artifacts_readme.txt _output
