@@ -45,11 +45,17 @@ jobs:
         run: msbuild dxwrapper.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
 
       - name: Build stubs
-        run: msbuild ./Stub/stub.vcxproj -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+        run: msbuild ./Stub/stub.vcxproj } -verbosity:n -property:Configuration=${{matrix.build-flavour}}
+
+      - name: Copy files
+        run: |
+          mkdir .\out 
+          cp bin\${{matrix.build-flavour}}\Build\* .\out
+          cp Stub\bin\${{matrix.build-flavour}}\* .\out\Stub
 
       - name: Upload binaries
         uses: actions/upload-artifact@v3
         with:
           name: dxwrapper-${{env.GITHUB_SHA_SHORT}}-${{github.run_number}}-${{matrix.build-flavour}}
           path: |
-            bin\${{matrix.build-flavour}}\Build\*
+            .\out\*
